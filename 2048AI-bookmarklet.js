@@ -292,6 +292,7 @@ function setup_UI() {
 	var div = document.createElement('div');
 	div.style.border = "2px solid black";
 	div.style.paddingLeft = "15px";
+	div.style.marginBottom = "15px";
 	var button = document.createElement('button');
 	button.id = "toggleAI";
 	button.innerHTML = 'Run AI';
