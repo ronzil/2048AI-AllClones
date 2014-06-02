@@ -1,0 +1,39 @@
+.controls {
+  margin-top: 1em;
+  padding: 0.5em;
+  overflow: auto;
+}
+
+.ai-button, #feedback-container {
+  font-size: x-large;
+}
+
+#runs-container {
+	float: left;
+
+}
+
+#run-count {
+	width: 50px;
+}
+
+#run-button-container {
+  float: left;
+}
+
+#run-button , #hint-button {
+	width: 120px;
+}
+
+#hint-button-container, #feedback-container {
+  float: left;
+  display: none;
+}
+#hint-button-container {
+  clear: both;
+}
+
+#feedback-container {
+  margin-left: 1em;
+  font-weight: bold;
+}
