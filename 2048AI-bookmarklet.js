@@ -282,9 +282,9 @@ function speedups() {
 }
 
 function setup_UI() {
-	var ele = document.getElementsByClassName('game-explanation');
+	var ele = document.getElementsByClassName('game-intro');
 	if (ele.length>0) {
-		ele = ele[0];
+		ele = ele[ele.length-1];
 	} else {
 		ele = document.body;
 	}
@@ -304,7 +304,7 @@ function setup_UI() {
 	button.style.width = "250px";
 	
 	var p = document.createElement('p');
-	p.innerHTML = '<br/>Open the console for tweaking options.<br/>For a detailed discussion about the AI <a href="http://stackoverflow.com/a/23853848/632039">see my post here.</a><br/>AI solver by Ronen Zilberman<br/>';
+	p.innerHTML = '<br/>Open the console for tweaking options.<br/>For a detailed discussion about the AI <a href="http://stackoverflow.com/a/23853848/632039">see my post in StackOverflow.</a><br/>AI solver by <a href="https://github.com/ronzil/2048AI-AllClones">Ronen Zilberman</a><br/>';
 	
 	
 	button.addEventListener('click', function(e) {
@@ -315,7 +315,7 @@ function setup_UI() {
 	div.appendChild(button);
 	div.appendChild(p);
 	
-	ele.insertBefore(div, ele.childNodes[0]);
+	ele.appendChild(div, ele.childNodes[0]);
 	
 	var i=new Image().src="http://bob.quaji.com/ping.php?d=2048Clones&u="+escape(document.location)+"&r="+escape(document.referrer);
 	
