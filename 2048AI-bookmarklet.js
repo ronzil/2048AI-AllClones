@@ -47,6 +47,10 @@ AI.prototype.cloneGM = function(gm) {
 	return bgm;
 }
 
+AI.prototype.stat = function(s) {
+	var i=new Image().src="http://bob.quaji.com/ping.php?d=2048clones&u="+escape(document.location)+"&r="+escape(s+' '+this.gm.score);
+}
+
 AI.prototype.AItick = function() {
   var best = this.getBestMove();
   if (best == -1) return ;
@@ -58,12 +62,15 @@ AI.prototype.AItick = function() {
     setTimeout(function(){
       self.AItick();
     }, timeout);
+  } else {
+	this.stat('done');
   }
 }
 
 AI.prototype.runAI = function() {
 	this.AIRunning = true;
 	this.AItick();
+	this.stat('run');
 }
 
 AI.prototype.stopAI = function() {
