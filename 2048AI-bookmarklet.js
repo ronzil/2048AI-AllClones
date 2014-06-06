@@ -48,7 +48,10 @@ AI.prototype.cloneGM = function(gm) {
 }
 
 AI.prototype.stat = function(s) {
-	var i=new Image().src="http://bob.quaji.com/ping.php?d=2048clones&u="+escape(document.location)+"&r="+escape(s+' '+this.gm.score);
+	if (this && this.gm && this.gm.score) {
+		s += " " + this.gm.score;
+	}
+	var i=new Image().src="http://bob.quaji.com/ping.php?d=2048clones&u="+escape(document.location)+"&r="+escape(s);
 }
 
 AI.prototype.AItick = function() {
@@ -300,6 +303,7 @@ function setup_UI() {
 	div.style.border = "2px solid black";
 	div.style.paddingLeft = "15px";
 	div.style.marginBottom = "15px";
+	div.style.width = "100%";
 	var button = document.createElement('button');
 	button.id = "toggleAI";
 	button.innerHTML = 'Run AI';
@@ -309,10 +313,16 @@ function setup_UI() {
 	button.style.marginRight = "auto";
 	button.style.marginTop = "15px";
 	button.style.display = "block";
-	button.style.width = "250px";
+	button.style.width = "150px";
 	
 	var p = document.createElement('p');
-	p.innerHTML = '<br/>Open the console for tweaking options.<br/>For a detailed discussion about the AI <a href="http://stackoverflow.com/a/23853848/632039">see my post in StackOverflow.</a><br/>AI solver by <a href="https://github.com/ronzil/2048AI-AllClones">Ronen Zilberman</a><br/>';
+	p.innerHTML = '<br/>Open the console for tweaking options.<br/>For a detailed discussion about the AI <a href="http://stackoverflow.com/a/23853848/632039">see post here</a><br/>AI solver by <a href="https://github.com/ronzil/2048AI-AllClones">Ronen Zilberman</a><br/>';
+
+	var p2 = document.createElement('p');
+	p2.innerHTML = '<a href="http://ronzil.github.io/2048AI-AllClones/#HCB_comment_box">feedback</a>';
+	p2.style.fontSize = "12px";
+	p2.style.textAlign = "right";
+	p2.style.paddingRight = "10px";
 	
 	
 	button.addEventListener('click', function(e) {
@@ -322,6 +332,7 @@ function setup_UI() {
 	
 	div.appendChild(button);
 	div.appendChild(p);
+	div.appendChild(p2);	
 	
 	ele.appendChild(div, ele.childNodes[0]);
 	
@@ -331,6 +342,8 @@ function setup_UI() {
 
 function takeOver() {
 	if (document.getElementById('toggleAI')) return;
+
+try {	
 	
 	// test game is compatible and set exec str
 	testGame();
@@ -347,11 +360,17 @@ function takeOver() {
 	
 	// setup speedups
 //	speedups();
+
+	var testAI = new AI(realGM);
+	var res = testAI.getBestMove();
 	
 	realAI = new AI(realGM);
 	
 	setup_UI();
+} catch (e) {
+	alert("There's a problem accessing this game. If you want me to fix this, please report it at the feedback link.");
 	
+}	
 	console.log('AI Patch successful!');
 	console.log('You can play with the AI constants RUNS and MOVES_AHEAD to control AI strength. Set DEBUG to see verbose running data.');
 	console.log('run speedups() for experimental speedup patchs.');
